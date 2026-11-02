@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Selexped</title>
+<style>
+:root{--red:#d93616;--blue:#4277b3;--ink:#0f141d;--mute:#3a475a}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{display:flex;align-items:center;justify-content:center;flex-direction:column;font-family:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);overflow:hidden;position:relative;background:#a9b8d0}
+/* mesh gradient háttér */
+.mesh{position:fixed;inset:-10%;z-index:0;filter:blur(40px) saturate(1.15);
+  background:
+   radial-gradient(40% 40% at 18% 20%,rgba(30,70,130,.6),transparent 70%),
+   radial-gradient(35% 35% at 85% 15%,rgba(70,115,190,.45),transparent 70%),
+   radial-gradient(40% 40% at 82% 88%,rgba(200,60,40,.3),transparent 70%),
+   radial-gradient(30% 30% at 12% 85%,rgba(225,120,100,.26),transparent 70%);
+  animation:mesh 22s ease-in-out infinite alternate}
+@keyframes mesh{to{transform:translate(2%,-2%) scale(1.08) rotate(2deg)}}
+/* finom szemcsézet */
+.grain{position:fixed;inset:0;z-index:0;opacity:.07;pointer-events:none;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+
+.stage{container-type:inline-size;position:relative;z-index:1;width:min(330px,80vw,46vh);aspect-ratio:1;display:flex;align-items:center;justify-content:center;transition:transform .15s ease-out;will-change:transform}
+.stage svg{position:absolute;z-index:2;pointer-events:none;inset:0;width:100%;height:100%;overflow:visible}
+
+/* Siri-szerű izzó, kavargó színek */
+.aura{position:absolute;left:50%;top:42%;width:66%;aspect-ratio:1;transform:translate(-50%,-50%);filter:blur(26px) saturate(1.05);opacity:.5;animation:breathe 5s ease-in-out infinite;z-index:0}
+.aura i{position:absolute;left:28%;top:28%;width:44%;height:44%;opacity:.95;animation:orb 9s linear infinite,morph 6s ease-in-out infinite alternate}
+.aura i:nth-child(1){background:#5b92d6}
+.aura i:nth-child(2){background:#ee7a63;animation-duration:12s,7s;animation-direction:reverse,alternate}
+.aura i:nth-child(3){background:#6f8fd8;animation-duration:15s,5s}
+.aura i:nth-child(4){background:#7fc0e8;animation-duration:11s,8s;animation-direction:reverse,alternate-reverse}
+.aura i:nth-child(5){background:#f0a27c;animation-duration:17s,6.5s}
+@keyframes orb{from{transform:rotate(0) translateX(52%) rotate(0)}to{transform:rotate(360deg) translateX(52%) rotate(-360deg)}}
+@keyframes morph{from{border-radius:50% 45% 55% 50%}to{border-radius:40% 60% 45% 55%}}
+@keyframes breathe{50%{transform:translate(-50%,-50%) scale(1.1)}}
+/* üveg korong, forgó színátmenetes szegéllyel */
+.glass{position:absolute;left:30%;top:22%;width:40%;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(150deg,rgba(255,255,255,.3),rgba(255,255,255,.04));z-index:1;
+  backdrop-filter:blur(10px) saturate(1.7);-webkit-backdrop-filter:blur(10px) saturate(1.7);
+  box-shadow:0 20px 50px -14px rgba(66,119,179,.28),inset 0 1px 1px rgba(255,255,255,.95),inset 0 -14px 30px rgba(255,255,255,.12);
+  animation:in 1.2s cubic-bezier(.2,.8,.2,1) both}
+.glass:before{content:"";position:absolute;inset:-1.5px;border-radius:50%;padding:1.5px;
+  background:conic-gradient(from 0deg,rgba(255,255,255,.9),var(--blue),rgba(255,255,255,.9) 35%,var(--red) 60%,rgba(255,255,255,.9));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
+  animation:spin 12s linear infinite;opacity:.45}
+.globe{width:86%;display:block;position:relative;filter:drop-shadow(0 4px 10px rgba(20,26,36,.12))}
+.f{animation:flow 7s ease-in-out infinite alternate}
+.f1{animation-duration:5.5s}.f2{animation-duration:7s;animation-direction:alternate-reverse}.f3{animation-duration:8s}.f4{animation-duration:6.5s;animation-direction:alternate-reverse}.f5{animation-duration:5s}
+@keyframes flow{from{transform:translate(-22px,16px)}to{transform:translate(22px,-16px)}}
+.globe{animation:float 6s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-3%) scale(1.02)}}
+.word{position:absolute;left:0;right:0;top:65%;text-align:center;z-index:1;font-family:"Palatino Linotype",Palatino,"Book Antiqua","Iowan Old Style",Georgia,serif;font-style:italic;font-weight:700;font-size:clamp(26px,11cqw,38px);letter-spacing:.01em;line-height:1;
+  background:linear-gradient(180deg,#5d97d6 0%,#2f66a8 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+  text-shadow:none;animation:up 1.2s .2s cubic-bezier(.2,.8,.2,1) both}
+
+.orbit{fill:none;stroke:var(--blue);stroke-opacity:.22;stroke-width:1}
+.orbit.dash{stroke-dasharray:1 8;stroke-linecap:round;stroke-width:1.6;stroke-opacity:.45}
+.spin{transform-origin:230px 230px;animation:spin 26s linear infinite}
+.upright{animation:spin 26s linear infinite reverse;transform-origin:0 0}
+.upright2{animation:spin 44s linear infinite;transform-origin:0 0}
+.spin.rev{animation-duration:44s;animation-direction:reverse}
+.dot{fill:var(--blue)}
+.dot.hot{fill:var(--red);filter:drop-shadow(0 0 6px rgba(217,54,22,.8))}
+.comet{fill:none;stroke:url(#tail);stroke-width:3;stroke-linecap:round;stroke-dasharray:90 2000}
+.halo{fill:var(--red);animation:pulse 2.6s ease-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{from{transform:scale(1);opacity:.4}to{transform:scale(3.4);opacity:0}}
+@keyframes in{from{opacity:0;transform:scale(.92)}}
+@keyframes up{from{opacity:0;transform:translateY(14px)}}
+
+h1{position:relative;z-index:1;margin:4vh 12px 1.8vh;text-align:center;font-size:clamp(14px,3.8vw,20px);white-space:nowrap;font-weight:300;letter-spacing:-.02em;line-height:1.15;animation:up 1.2s .3s cubic-bezier(.2,.8,.2,1) both}
+h1 b{font-weight:700;background:linear-gradient(90deg,var(--blue),#7a6ab8 55%,var(--red));-webkit-background-clip:text;background-clip:text;color:transparent}
+.pill{position:relative;z-index:1;margin:0 22px;max-width:270px;display:inline-flex;line-height:1.4;align-items:center;gap:8px;padding:7px 12px;border-radius:16px;font-size:10px;color:var(--mute);text-align:center;
+  background:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.7);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 4px 14px rgba(66,119,179,.08);animation:up 1.2s .5s cubic-bezier(.2,.8,.2,1) both}
+.pill i{font-style:normal;color:var(--red);animation:tw 2.4s ease-in-out infinite}
+@keyframes tw{50%{opacity:.35;transform:scale(.8)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<div class="mesh"></div><div class="grain"></div>
+<div class="stage" id="stage">
+  <svg viewBox="0 0 460 460" aria-hidden="true">
+    <defs><linearGradient id="tail" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="460" y2="0"><stop offset="0" stop-color="#d93616" stop-opacity="0"/><stop offset="1" stop-color="#d93616"/></linearGradient></defs>
+    <circle class="orbit" cx="230" cy="230" r="196"/>
+    <circle class="orbit dash" cx="230" cy="230" r="222"/>
+    <g class="spin">
+      <circle class="comet" cx="230" cy="230" r="196" transform="rotate(-18 230 230)"/>
+      <g transform="translate(426 230)">
+        <circle class="halo" r="12"/>
+        <g class="upright">
+          <circle r="13" fill="#fff" stroke="var(--red)" stroke-width="1.5" style="filter:drop-shadow(0 2px 8px rgba(217,54,22,.45))"/>
+          <text y="3.6" text-anchor="middle" font-size="10.5" font-weight="800" fill="var(--red)" style="letter-spacing:.03em">AI</text>
+        </g>
+      </g>
+      <g transform="translate(34 230)"><g class="upright"><circle r="17" fill="#fff" stroke="#4277b3" stroke-width="1.3" style="filter:drop-shadow(0 2px 6px rgba(66,119,179,.35))"/><g transform="scale(.9) translate(-12 -12)" fill="#2f66a8"><rect x="1" y="4.6" width="13.4" height="10.6" rx=".8" fill="#e8642a"/><rect x="2.4" y="6" width="10.6" height="1.5" fill="#fff" opacity=".55"/><path d="M15.4 8.2h3.6l3.2 3.6v3.4h-6.8z"/><path d="M16.8 9.5h2l1.9 2.2h-3.9z" fill="#fff"/><rect x="1" y="15" width="21.2" height="1.6"/><g fill="#2f66a8" stroke="#fff" stroke-width="1"><circle cx="5" cy="18.4" r="2.3"/><circle cx="10.2" cy="18.4" r="2.3"/><circle cx="18" cy="18.4" r="2.3"/></g></g></g></g>
+      <g transform="translate(230 34)"><circle r="17" fill="#fff" stroke="#4277b3" stroke-width="1.3" style="filter:drop-shadow(0 2px 6px rgba(66,119,179,.35))"/><g transform="scale(.8) translate(-12 -12)" fill="#2f66a8"><g transform="rotate(90 12 12)"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/></g></g></g>
+    </g>
+    <g class="spin rev">
+      <circle class="dot" cx="452" cy="230" r="3"/>
+      <g transform="translate(387 73)"><g class="upright2"><circle r="17" fill="#fff" stroke="#4277b3" stroke-width="1.3" style="filter:drop-shadow(0 2px 6px rgba(66,119,179,.35))"/><text y="3.6" text-anchor="middle" font-size="10" font-weight="800" fill="#2f66a8" style="letter-spacing:.03em">WEB</text></g></g>
+      <g transform="translate(230 452)"><g class="upright2"><circle r="17" fill="#fff" stroke="#4277b3" stroke-width="1.3" style="filter:drop-shadow(0 2px 6px rgba(66,119,179,.35))"/><g transform="scale(.9) translate(-12 -12)" fill="#2f66a8"><rect x="2.4" y="9.6" width="4.6" height="4" fill="#e8642a"/><rect x="7.9" y="9.6" width="4.6" height="4" fill="#f7a21e"/><rect x="13.3" y="9.6" width="4" height="4" fill="#e8642a"/><rect x="5.2" y="5.4" width="4.6" height="3.8" fill="#f7a21e"/><rect x="10.6" y="5.4" width="4.6" height="3.8" fill="#e8642a"/><rect x="18.3" y="6" width="3.6" height="7.6"/><rect x="19" y="7.2" width="2.2" height="1.3" fill="#fff"/><path d="M1 14.4h22l-3.2 5.2H4.2z"/><path d="M2 22q2.5-1.9 5 0t5 0 5 0 5 0" fill="none" stroke="#4a9fe0" stroke-width="1.5" stroke-linecap="round"/></g></g></g>
+    </g>
+  </svg>
+  <div class="aura"><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="glass"><svg class="globe" viewBox="50 60 770 770" aria-hidden="true">
+      <defs>
+        <clipPath id="gclip"><circle cx="435" cy="445" r="380"/></clipPath>
+        <linearGradient id="gb" gradientUnits="userSpaceOnUse" x1="70" y1="450" x2="650" y2="130"><stop offset="0" stop-color="#0b6cb5"/><stop offset=".5" stop-color="#17a6e6"/><stop offset="1" stop-color="#0a70b8"/></linearGradient>
+        <linearGradient id="gb2" gradientUnits="userSpaceOnUse" x1="90" y1="320" x2="390" y2="80"><stop offset="0" stop-color="#0b6cb5"/><stop offset="1" stop-color="#1ba3e0"/></linearGradient>
+        <linearGradient id="go1" gradientUnits="userSpaceOnUse" x1="90" y1="620" x2="785" y2="290"><stop offset="0" stop-color="#e8392b"/><stop offset=".4" stop-color="#f7931e"/><stop offset=".75" stop-color="#f2691f"/><stop offset="1" stop-color="#e5332e"/></linearGradient>
+        <linearGradient id="go2" gradientUnits="userSpaceOnUse" x1="245" y1="780" x2="810" y2="400"><stop offset="0" stop-color="#e8392b"/><stop offset=".45" stop-color="#f7931e"/><stop offset=".8" stop-color="#f2691f"/><stop offset="1" stop-color="#e5332e"/></linearGradient>
+        <linearGradient id="go3" gradientUnits="userSpaceOnUse" x1="520" y1="805" x2="785" y2="565"><stop offset="0" stop-color="#f7931e"/><stop offset="1" stop-color="#e8392b"/></linearGradient>
+        <radialGradient id="gs" cx=".32" cy=".24" r=".6"><stop offset="0" stop-color="#fff" stop-opacity=".18"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+      </defs>
+      <g clip-path="url(#gclip)">
+      <path class="f f1" d="M90,320 C130,200 250,110 390,80 C320,140 190,200 90,320Z" fill="url(#gb2)"/>
+      <path class="f f2" d="M70,420 C70,380 150,350 230,290 C320,225 380,130 500,112 C560,105 610,120 645,150 C580,170 520,220 460,290 C400,360 350,420 270,470 C200,510 120,525 90,505 C75,490 68,460 70,420Z" fill="url(#gb)"/>
+      <path class="f f3" d="M88,568 C170,550 260,500 340,420 C420,340 500,250 590,215 C680,185 760,250 785,325 C730,320 680,345 620,395 C560,445 500,530 420,590 C340,650 250,700 180,695 C130,690 95,630 88,568Z" fill="url(#go1)"/>
+      <path class="f f4" d="M245,762 C330,730 420,660 520,560 C610,470 680,390 750,380 C790,375 812,410 805,450 C795,520 740,570 680,630 C610,700 540,760 450,790 C370,812 290,800 245,762Z" fill="url(#go2)"/>
+      <path class="f f5" d="M520,805 C620,770 720,680 785,565 C770,650 700,740 600,790 C570,800 540,808 520,805Z" fill="url(#go3)"/>
+      </g>
+      <circle cx="435" cy="445" r="380" fill="url(#gs)"/>
+    </svg></div>
+  <div class="word" aria-label="Selester">Selester</div>
+</div>
+<h1>Üdvözöljük a <b>Selexped</b> világában</h1>
+<div class="pill"><i>✦</i>Okosabb logisztika és szállítmányozás, emberi kapcsolatokkal</div>
+<script>
+// finom parallaxis egérmozgásra
+const s=document.getElementById('stage');
+addEventListener('pointermove',e=>{const x=(e.clientX/innerWidth-.5)*2,y=(e.clientY/innerHeight-.5)*2;
+  s.style.transform=`translate(${x*8}px,${y*8}px) rotateX(${-y*3}deg) rotateY(${x*3}deg)`});
+</script>
+</body>
+</html>
