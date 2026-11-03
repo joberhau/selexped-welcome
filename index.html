@@ -77,6 +77,17 @@ h1 b{font-weight:700;background:linear-gradient(90deg,var(--blue),#7a6ab8 55%,va
   background:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.7);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 4px 14px rgba(66,119,179,.08);animation:up 1.2s .5s cubic-bezier(.2,.8,.2,1) both}
 .pill i{font-style:normal;color:var(--red);animation:tw 2.4s ease-in-out infinite}
 @keyframes tw{50%{opacity:.35;transform:scale(.8)}}
+.txt{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center}
+/* fekvő, alacsony ablak (pl. beágyazott login-panel): kép balra, szöveg jobbra, nagyobb keringő jelvények */
+@media (min-aspect-ratio:5/4){
+  body{flex-direction:row;gap:2vw;padding:0 3vw}
+  .stage{width:min(52vh,46vw,380px);flex:none}
+  .txt{align-items:flex-start;max-width:42vw}
+  h1{white-space:normal;text-align:left;margin:0 0 12px;font-size:clamp(17px,3.6vw,28px)}
+  .pill{margin:0;max-width:none;font-size:clamp(11px,1.9vw,13px);text-align:left;padding:8px 14px}
+  .word{font-size:clamp(20px,9cqw,34px)}
+  .stage svg g[transform*="translate"] circle[r="17"],.stage svg g[transform*="translate"] circle[r="13"]{stroke-width:2}
+}
 @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
 </head>
@@ -127,8 +138,10 @@ h1 b{font-weight:700;background:linear-gradient(90deg,var(--blue),#7a6ab8 55%,va
     </svg></div>
   <div class="word" aria-label="Selester">Selester</div>
 </div>
+<div class="txt">
 <h1>Üdvözöljük a <b>Selexped</b> világában</h1>
 <div class="pill"><i>✦</i>Okosabb logisztika és szállítmányozás, emberi kapcsolatokkal</div>
+</div>
 <script>
 // finom parallaxis egérmozgásra
 const s=document.getElementById('stage');
