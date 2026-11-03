@@ -50,7 +50,7 @@ body{display:flex;align-items:center;justify-content:center;flex-direction:colum
 .f{animation:flow 7s ease-in-out infinite alternate}
 .f1{animation-duration:5.5s}.f2{animation-duration:7s;animation-direction:alternate-reverse}.f3{animation-duration:8s}.f4{animation-duration:6.5s;animation-direction:alternate-reverse}.f5{animation-duration:5s}
 .f{transform-origin:435px 445px}
-@keyframes flow{0%{transform:translate(-48px,30px) rotate(-9deg) scale(1)}50%{transform:translate(8px,-6px) rotate(2deg) scale(1.05)}100%{transform:translate(48px,-30px) rotate(9deg) scale(1.02)}}
+@keyframes flow{0%{transform:translate(-30px,20px) rotate(-4deg)}100%{transform:translate(30px,-20px) rotate(4deg)}}
 .glare{animation:glare 6s 1s ease-in-out infinite}
 @keyframes glare{0%{transform:translateX(0)}55%,100%{transform:translateX(1000px)}}
 .globe{animation:float 6s ease-in-out infinite}
@@ -59,8 +59,8 @@ body{display:flex;align-items:center;justify-content:center;flex-direction:colum
   background:linear-gradient(180deg,#5d97d6 0%,#2f66a8 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
   text-shadow:none;animation:up 1.2s .2s cubic-bezier(.2,.8,.2,1) both}
 
-.orbit{fill:none;stroke:var(--blue);stroke-opacity:.22;stroke-width:1}
-.orbit.dash{stroke-dasharray:1 8;stroke-linecap:round;stroke-width:1.6;stroke-opacity:.45}
+.orbit{fill:none;stroke:#2f66a8;stroke-opacity:.6;stroke-width:1.8}
+.orbit.dash{stroke-dasharray:1 8;stroke-linecap:round;stroke-width:2.6;stroke-opacity:.75}
 .spin{transform-origin:230px 230px;animation:spin 26s linear infinite}
 .upright{animation:spin 26s linear infinite reverse;transform-origin:0 0}
 .upright2{animation:spin 44s linear infinite;transform-origin:0 0}
