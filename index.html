@@ -78,15 +78,12 @@ h1 b{font-weight:700;background:linear-gradient(90deg,var(--blue),#7a6ab8 55%,va
 .pill i{font-style:normal;color:var(--red);animation:tw 2.4s ease-in-out infinite}
 @keyframes tw{50%{opacity:.35;transform:scale(.8)}}
 .txt{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center}
-/* fekvő, alacsony ablak (pl. beágyazott login-panel): kép balra, szöveg jobbra, nagyobb keringő jelvények */
+/* fekvő, alacsony ablak (pl. beágyazott login-panel): marad az álló elrendezés (kép középen, szöveg alatta), de a kép a magasságot kitölti, a jelvények nagyobbak */
 @media (min-aspect-ratio:5/4){
-  body{flex-direction:row;gap:2vw;padding:0 3vw}
-  .stage{width:min(70vh,50vw,400px);flex:none}
-  .txt{align-items:flex-start;max-width:36vw}
-  h1{white-space:normal;text-align:left;margin:0 0 10px;font-size:clamp(16px,3.4vw,26px)}
-  .pill{margin:0;max-width:none;font-size:clamp(10px,1.8vw,13px);text-align:left;padding:7px 12px}
-  .upright>*,.upright2>*{scale:1.5}
-  .word{font-size:clamp(20px,9cqw,34px)}
+  .stage{width:min(64vh,80vw,400px)}
+  h1{margin:14px 12px 6px;font-size:clamp(15px,3vw,22px)}
+  .pill{max-width:min(420px,90vw);font-size:clamp(10px,1.9vw,12px);padding:5px 12px}
+  .upright>*,.upright2>*{scale:1.7}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
