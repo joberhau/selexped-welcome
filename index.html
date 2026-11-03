@@ -80,7 +80,9 @@ h1 b{font-weight:700;background:linear-gradient(90deg,var(--blue),#7a6ab8 55%,va
 .txt{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center}
 /* fekvő, alacsony ablak (pl. beágyazott login-panel): marad az álló elrendezés (kép középen, szöveg alatta), de a kép a magasságot kitölti, a jelvények nagyobbak */
 @media (min-aspect-ratio:5/4){
-  .stage{width:min(64vh,80vw,400px)}
+  .stage{width:min(60vh,80vw,380px)}
+  .glass{width:33%;left:33.5%;top:26%}
+  .word{top:61%;font-size:clamp(18px,8cqw,30px)}
   h1{margin:14px 12px 6px;font-size:clamp(15px,3vw,22px)}
   .pill{max-width:min(420px,90vw);font-size:clamp(10px,1.9vw,12px);padding:5px 12px}
   .upright>*,.upright2>*{scale:1.7}
