@@ -50,7 +50,7 @@ body{display:flex;align-items:center;justify-content:center;flex-direction:colum
 .f{animation:flow 7s ease-in-out infinite alternate}
 .f1{animation-duration:5.5s}.f2{animation-duration:7s;animation-direction:alternate-reverse}.f3{animation-duration:8s}.f4{animation-duration:6.5s;animation-direction:alternate-reverse}.f5{animation-duration:5s}
 .f{transform-origin:435px 445px}
-@keyframes flow{0%{transform:translate(-30px,20px) rotate(-4deg)}100%{transform:translate(30px,-20px) rotate(4deg)}}
+@keyframes flow{0%{transform:translate(-5px,3px)}100%{transform:translate(5px,-3px)}}
 .glare{animation:glare 6s 1s ease-in-out infinite}
 @keyframes glare{0%{transform:translateX(0)}55%,100%{transform:translateX(1000px)}}
 .globe{animation:float 6s ease-in-out infinite}
@@ -130,11 +130,11 @@ a.pill:hover em{transform:translate(2px,-2px)}
   <div class="glass"><svg class="globe" viewBox="50 60 770 770" aria-hidden="true">
       <defs>
         <clipPath id="gclip"><circle cx="435" cy="445" r="380"/></clipPath>
-        <linearGradient id="gb" gradientUnits="userSpaceOnUse" x1="70" y1="450" x2="650" y2="130"><stop offset="0" stop-color="#0b6cb5"/><stop offset=".5" stop-color="#17a6e6"/><stop offset="1" stop-color="#0a70b8"/></linearGradient>
-        <linearGradient id="gb2" gradientUnits="userSpaceOnUse" x1="90" y1="320" x2="390" y2="80"><stop offset="0" stop-color="#0b6cb5"/><stop offset="1" stop-color="#1ba3e0"/></linearGradient>
-        <linearGradient id="go1" gradientUnits="userSpaceOnUse" x1="90" y1="620" x2="785" y2="290"><stop offset="0" stop-color="#e8392b"/><stop offset=".4" stop-color="#f7931e"/><stop offset=".75" stop-color="#f2691f"/><stop offset="1" stop-color="#e5332e"/></linearGradient>
-        <linearGradient id="go2" gradientUnits="userSpaceOnUse" x1="245" y1="780" x2="810" y2="400"><stop offset="0" stop-color="#e8392b"/><stop offset=".45" stop-color="#f7931e"/><stop offset=".8" stop-color="#f2691f"/><stop offset="1" stop-color="#e5332e"/></linearGradient>
-        <linearGradient id="go3" gradientUnits="userSpaceOnUse" x1="520" y1="805" x2="785" y2="565"><stop offset="0" stop-color="#f7931e"/><stop offset="1" stop-color="#e8392b"/></linearGradient>
+        <linearGradient id="gb" spreadMethod="reflect" gradientUnits="userSpaceOnUse" x1="70" y1="450" x2="650" y2="130"><stop offset="0" stop-color="#0b6cb5"/><stop offset=".5" stop-color="#17a6e6"/><stop offset="1" stop-color="#0a70b8"/><animateTransform attributeName="gradientTransform" type="translate" values="-70 45;70 -45;-70 45" keyTimes="0;.5;1" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1" dur="7s" repeatCount="indefinite"/></linearGradient>
+        <linearGradient id="gb2" spreadMethod="reflect" gradientUnits="userSpaceOnUse" x1="90" y1="320" x2="390" y2="80"><stop offset="0" stop-color="#0b6cb5"/><stop offset="1" stop-color="#1ba3e0"/><animateTransform attributeName="gradientTransform" type="translate" values="-70 45;70 -45;-70 45" keyTimes="0;.5;1" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1" dur="9s" repeatCount="indefinite"/></linearGradient>
+        <linearGradient id="go1" spreadMethod="reflect" gradientUnits="userSpaceOnUse" x1="90" y1="620" x2="785" y2="290"><stop offset="0" stop-color="#e8392b"/><stop offset=".4" stop-color="#f7931e"/><stop offset=".75" stop-color="#f2691f"/><stop offset="1" stop-color="#e5332e"/><animateTransform attributeName="gradientTransform" type="translate" values="-70 45;70 -45;-70 45" keyTimes="0;.5;1" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1" dur="8s" repeatCount="indefinite"/></linearGradient>
+        <linearGradient id="go2" spreadMethod="reflect" gradientUnits="userSpaceOnUse" x1="245" y1="780" x2="810" y2="400"><stop offset="0" stop-color="#e8392b"/><stop offset=".45" stop-color="#f7931e"/><stop offset=".8" stop-color="#f2691f"/><stop offset="1" stop-color="#e5332e"/><animateTransform attributeName="gradientTransform" type="translate" values="-70 45;70 -45;-70 45" keyTimes="0;.5;1" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1" dur="10s" repeatCount="indefinite"/></linearGradient>
+        <linearGradient id="go3" spreadMethod="reflect" gradientUnits="userSpaceOnUse" x1="520" y1="805" x2="785" y2="565"><stop offset="0" stop-color="#f7931e"/><stop offset="1" stop-color="#e8392b"/><animateTransform attributeName="gradientTransform" type="translate" values="-70 45;70 -45;-70 45" keyTimes="0;.5;1" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1" dur="6s" repeatCount="indefinite"/></linearGradient>
         <radialGradient id="gr" cx=".5" cy=".5" r=".5"><stop offset=".62" stop-color="#fff" stop-opacity="0"/><stop offset=".88" stop-color="#1d4a80" stop-opacity=".1"/><stop offset="1" stop-color="#fff" stop-opacity=".4"/></radialGradient>
         <radialGradient id="gh" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff" stop-opacity=".7"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
         <linearGradient id="gl" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".28"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
